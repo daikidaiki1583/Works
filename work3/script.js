@@ -1,10 +1,3 @@
-/*
-document.querySelector('.cards').addEventListener('click',function(){
-    console.log(this);
-});
-*/
-
-
 document.querySelectorAll('.cards').forEach(function(cards){
     var judge = 0;
 
@@ -25,17 +18,3 @@ document.querySelectorAll('.cards').forEach(function(cards){
 
     });
 });
-
-
-/*
-function change(){
-    document.querySelector('.cards').src = './images/owner.jpg';
-}
-*/
-
-/*
-var test = document.querySelectorAll('.cards');
-console.log(test);
-*/
-
-//querySlectorAllとforeachについて調べる　
