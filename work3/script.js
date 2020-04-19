@@ -3,6 +3,8 @@ document.querySelectorAll('.cards').forEach(function(cards){
 
     cards.addEventListener('click',function(){
         console.log(this);
+
+        var imgNumber = this.id;
         
         if (judge === 0){
 
@@ -11,7 +13,7 @@ document.querySelectorAll('.cards').forEach(function(cards){
         
         } else if (judge === 1) {
 
-        this.src = './images/gen1.png';
+        this.src = './images/gen' + imgNumber + '.png';
         judge--;    
 
         }
