@@ -1,3 +1,76 @@
+html body {
+  margin: 0;
+  background-image: linear-gradient(-45deg, #fff 25%, #ffff7f 25%, #ffff7f 50%, #fff 50%, #fff 75%, #ffff7f 75%);
+  background-size: 30px 30px;
+}
+
+html body .button {
+  height: 100px;
+  width: 200px;
+  margin-left: 400px;
+  margin-top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 10px;
+  font-weight: bold;
+  color: #fff;
+  font-size: 20px;
+  background-color: #a3ffff;
+}
+
+html body #answer {
+  height: 100px;
+  width: 300px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #fff;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+html body #answer .answer-item {
+  display: inline-block;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  line-height: 100px;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+html body #answer .answer-item#judge-html {
+  background-color: #ffc1ff;
+  z-index: 100;
+}
+
+html body #answer .answer-item#correct {
+  background-color: #ea5549;
+}
+
+html body #answer .answer-item#correct.add {
+  z-index: 200;
+}
+
+html body #answer .answer-item#incorrect {
+  background-color: #e6eae6;
+}
+
+html body #answer .answer-item#incorrect.add {
+  z-index: 200;
+}
+
 html body .wrap {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -5,14 +78,14 @@ html body .wrap {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   width: 1200px;
-  height: 100vh;
+  height: 700px;
   margin: auto;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 
 html body .wrap .cards {
