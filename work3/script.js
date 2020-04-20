@@ -17,50 +17,45 @@ function init(){ //アプリ起動時の状態を定義
 }
 
 document.querySelectorAll('.cards').forEach(function(cards){
-    
-    if(count == 0){
-        count++;
-
+        
         cards.addEventListener('click',function(){
-            console.log('1回目');
             
-            imgNumber = this.id;
-            this.src = './images/gen' + imgNumber + '.png';
-            
-            //選んだカードを記憶
-            memory.memoryImg1=saveImg();
-            console.log(memory.memoryImg1);
+            if (count == 0){         //count==0が、1手目の状態
 
-        });
+                reset();
 
+                imgNumber = this.id;
+                this.src = './images/gen' + imgNumber + '.png';
+                
+                //選んだカードを記憶
+                memory.memoryImg1 = saveImg();
 
-    } else if (count == 1) {
-        count++;
-
-        cards.addEventListener('click',function(){
-            console.log('2回目');
-
-            //カードを表面にする。
-            imgNumber = this.id;
-            this.src = './images/gen' + imgNumber + '.png';
-
-            //選んだカードを記憶
-            memory.memoryImg2=saveImg();
-            console.log(memory.memoryImg2);
-            if(memory.memoryImg1 == memory.memoryImg2){
-                console.log('正解');
-                document.getElementById('correct').classList.add('add');
-            } else{
-                console.log('不正解');
-                document.getElementById('incorrect').classList.add('add');
+                count++;
 
             }
 
+            else if (count == 1){　　　//count==1が、2手目の状態
+            
+                imgNumber = this.id;
+                this.src = './images/gen' + imgNumber + '.png'; 
     
-        });
+                memory.memoryImg2 = saveImg();　　　 //選んだカードを記憶
+                
+                if(memory.memoryImg1 == memory.memoryImg2){  //正解(1手目と2手目が同じの場合)の処理
+                    document.getElementById('correct').classList.add('add');
+                    memory.memoryImg1 = '';
+                    memory.memoryImg2 = '';
+                } else if (memory.memoryImg1 != memory.memoryImg2){　//不正解(1手目と2手目が異なる場合)の処理
+                    document.getElementById('incorrect').classList.add('add');
+                    memory.memoryImg1 = '';
+                    memory.memoryImg2 = '';
+                }
 
-        count=0;
-    }
+                count--;
+
+            } 
+            
+        });
 });
 
 
@@ -87,8 +82,19 @@ document.querySelector(".button").addEventListener('click',function(){  //全て
         
     document.querySelectorAll('.cards').forEach(function(cards){
             cards.src = './images/owner.jpg';
-            document.getElementById('correct').classList.remove('add');
-            document.getElementById('incorrect').classList.remove('add');
+            reset();
 
     });
 });
+
+
+function reset(){ //判定の部分のクラス名addを削除する。
+        document.querySelectorAll('.cards').forEach(function(cards){
+            document.getElementById('correct').classList.remove('add');
+            document.getElementById('incorrect').classList.remove('add');
+            memory.memoryImg1 = '';
+            memory.memoryImg2 = '';
+
+
+    });
+}
