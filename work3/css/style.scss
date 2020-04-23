@@ -11,20 +11,57 @@ html{
 
         .button{
             height: 100px;
-            width: 200px;
-            margin-left: 400px;
-            margin-top: 40px;
+            width: 300px;
+            position: absolute;
+            left: 0;
+            top: 40px;
+            font-size: 40px;
             display: flex;
             cursor: pointer;
             justify-content: center;
             align-items: center;
-            border-radius: 10px;
             font-weight: bold;
             color: #fff;
-            font-size: 20px;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
             background-color:#a3ffff;
             
         }
+
+        #alert1,#alert2{
+            width: 600px;
+            height: 140px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%,-140px);
+            background-color: #e6eae6;
+            border-bottom-right-radius: 10px;
+            border-bottom-left-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            font-weight: bold;
+            color: #fff;
+            transition: 0.5s;
+                
+                &.add1{
+
+                    transform:translate(-50%,0px);
+                    
+                }
+
+                &.add2{
+
+                    transform:translate(-50%,0px);
+                    
+                    background-color:#9fc24d;
+                }
+    
+        }
+
+
 
         #answer{
             height: 100px;
@@ -81,24 +118,18 @@ html{
         .wrap{
             display: flex;
             flex-wrap: wrap;
-            width: 1200px;
-            height: 700px;
-            margin: auto;
+            width: 800px;
+            height: 600px;
+            margin: 140px auto 0 auto;
             justify-content: space-between;
-            align-items: flex-end;
+            align-items: center;
             
             .cards{
                 border: solid 1px transparent;
                 border-radius: 10px;
-                width: 200px;
-                height: 300px;
+                width: 150px;
+                height: 225px;
                 cursor: pointer;
-
-                img{
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 10px;
-                }
 
             }
 
