@@ -54,6 +54,7 @@ html body form .button {
   font-weight: bold;
   color: purple;
   background-color: yellow;
+  cursor: pointer;
 }
 
 html body #listall {
@@ -71,6 +72,7 @@ html body #listall div {
   width: 33.3%;
   height: 100%;
   border-right: #e6e6fa solid 1px;
+  border-left: #e6e6fa solid 1px;
 }
 
 html body #listall div h1 {
@@ -97,10 +99,39 @@ html body #listall div .item {
 }
 
 html body #listall div .item .name {
-  width: 90%;
+  width: 80%;
+  position: relative;
+}
+
+html body #listall div .item .name i {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
+  display: none;
+}
+
+html body #listall div .item .name:hover i {
+  display: inline;
+  -webkit-transition: 1s;
+  transition: 1s;
+}
+
+html body #listall div .item .plus {
+  width: 5%;
+  cursor: pointer;
+  background-color: red;
+  color: #fff;
 }
 
 html body #listall div .item .counter {
   width: 10%;
+}
+
+html body #listall div .item .minus {
+  width: 5%;
+  cursor: pointer;
+  background-color: blue;
+  color: #fff;
 }
 /*# sourceMappingURL=style.css.map */

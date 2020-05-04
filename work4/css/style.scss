@@ -43,6 +43,7 @@ html{
                     font-weight: bold;
                     color: purple;
                     background-color: yellow;
+                    cursor: pointer;
                 }
 
         } //form
@@ -60,7 +61,7 @@ html{
                 width: 33.3%;
                 height: 100%;
                 border-right:$lavendar solid 1px ;
-                border-left: $lavender solid 1px;
+                border-left: $lavendar solid 1px;
 
 
                     h1{
@@ -83,12 +84,43 @@ html{
 
 
                         .name{
-                            width: 90%;
+                            width: 80%;
+                            position: relative;
                             
+                            i{
+                                position: absolute;
+                                top:0;
+                                right:10px;
+                                cursor: pointer;
+                                display: none;
+                            }
+    
+                        }
+
+                        .name:hover i{
+                            display: inline;
+                            transition: 1s;
+                        }
+
+
+                        .plus{
+                            width: 5%;
+                            cursor: pointer;
+                            background-color: red;
+                            color: #fff;
                         }
 
                         .counter{
                             width: 10%;
+                        }
+
+                        .minus{
+                            width: 5%;
+                            cursor: pointer;
+                            background-color: blue;
+                            color: #fff;
+
+
                         }
                     }
                 
