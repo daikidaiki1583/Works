@@ -1,0 +1,103 @@
+$lavendar:#e6e6fa;
+
+
+html{
+    body{
+        margin: 0;
+
+        form{
+            text-align: center;
+            height: 160px;
+            border: 1px solid $lavendar;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+                select{
+                    width: 240px;
+                    height: 50px;
+                    margin-right: 24px;
+                }
+
+                input{
+                    width: 400px;
+                    height: 50px;
+                    padding: 0;
+                    margin: 0;
+                    box-sizing: border-box; 
+                    margin-right: 24px;   
+
+                    &.number-of-thing{
+                        width: 50px;
+                    }
+                }
+
+                .button{
+                    border-radius: 50%;
+                    border: solid 1px purple;
+                    height: 50px;
+                    width: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-weight: bold;
+                    color: purple;
+                    background-color: yellow;
+                }
+
+        } //form
+
+        #listall{
+            display: flex;
+
+            h1{
+                margin: 0;
+                line-height: 2;
+
+            }
+
+            div{
+                width: 33.3%;
+                height: 100%;
+                border-right:$lavendar solid 1px ;
+                border-left: $lavender solid 1px;
+
+
+                    h1{
+                        text-align: center;
+                        border-bottom:$lavendar solid 1px ;
+                        &.select{
+                            background-color: #ffffd6;
+                            transition: 1s;
+                        }
+                    }
+
+                    .item > div{
+                        text-align: center;
+                    }
+
+                    .item{
+                        width: 100%;
+                        display: flex;
+                        border-bottom:$lavendar solid 1px ;
+
+
+                        .name{
+                            width: 90%;
+                            
+                        }
+
+                        .counter{
+                            width: 10%;
+                        }
+                    }
+                
+
+            }
+
+        } //#listall
+
+
+
+    }//body
+}
