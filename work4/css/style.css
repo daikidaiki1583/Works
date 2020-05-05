@@ -57,40 +57,40 @@ html body form .button {
   cursor: pointer;
 }
 
-html body #listall {
+html body .listall {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-html body #listall h1 {
+html body .listall h1 {
   margin: 0;
   line-height: 2;
 }
 
-html body #listall div {
+html body .listall div {
   width: 33.3%;
   height: 100%;
   border-right: #e6e6fa solid 1px;
   border-left: #e6e6fa solid 1px;
 }
 
-html body #listall div h1 {
+html body .listall div h1 {
   text-align: center;
   border-bottom: #e6e6fa solid 1px;
 }
 
-html body #listall div h1.select {
+html body .listall div h1.select {
   background-color: #ffffd6;
   -webkit-transition: 1s;
   transition: 1s;
 }
 
-html body #listall div .item > div {
+html body .listall div .item > div {
   text-align: center;
 }
 
-html body #listall div .item {
+html body .listall div .item {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -98,12 +98,12 @@ html body #listall div .item {
   border-bottom: #e6e6fa solid 1px;
 }
 
-html body #listall div .item .name {
+html body .listall div .item .name {
   width: 80%;
   position: relative;
 }
 
-html body #listall div .item .name i {
+html body .listall div .item .name i {
   position: absolute;
   top: 0;
   right: 10px;
@@ -111,24 +111,24 @@ html body #listall div .item .name i {
   display: none;
 }
 
-html body #listall div .item .name:hover i {
+html body .listall div .item .name:hover i {
   display: inline;
   -webkit-transition: 1s;
   transition: 1s;
 }
 
-html body #listall div .item .plus {
+html body .listall div .item .plus {
   width: 5%;
   cursor: pointer;
   background-color: red;
   color: #fff;
 }
 
-html body #listall div .item .counter {
+html body .listall div .item .counter {
   width: 10%;
 }
 
-html body #listall div .item .minus {
+html body .listall div .item .minus {
   width: 5%;
   cursor: pointer;
   background-color: blue;
