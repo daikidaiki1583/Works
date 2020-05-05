@@ -102,26 +102,26 @@ html{
                             transition: 1s;
                         }
 
+                            .plus{
+                                width: 5%;
+                                cursor: pointer;
+                                background-color: red;
+                                color: #fff;
+                            }
 
-                        .plus{
-                            width: 5%;
-                            cursor: pointer;
-                            background-color: red;
-                            color: #fff;
-                        }
+                            .counter{
+                                width: 20%;
+                            }
 
-                        .counter{
-                            width: 10%;
-                        }
+                            .minus{
+                                width: 5%;
 
-                        .minus{
-                            width: 5%;
-                            cursor: pointer;
-                            background-color: blue;
-                            color: #fff;
+                                cursor: pointer;
+                                background-color: blue;
+                                color: #fff;
 
 
-                        }
+                            }
                     }
                 
 

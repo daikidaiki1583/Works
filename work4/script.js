@@ -7,22 +7,52 @@ const UIController = function(){
             let html,newHtml;
             
             if(type === `foods`) { 
-                html = '<div class="item food-item" id="food-%ID%"><div class="name">%name%<i class="delete-button">×</i></div><div class="plus">+</div><div class="counter">%num%</div><div class="minus">-</div></div>';
+                html = `<div class="item food-item" id="food-%ID%">
+                            <div class="name">%name%
+                                <div><i class="delete-button">×</i></div>
+                            </div>
+
+                            <div id="plus-%ID%-foods" class="change plus">+</div>
+                            <div id="counter-%ID%-foods">%num%</div>
+                            <div id="minus-%ID%-foods" class="change minus">-</div>
+                            
+                        </div>`;
+
 
             } else if (type === `liquar`) {
 
-                html = `<div class="item liquar-item" id="liquar-%ID%"><div class="name">%name%<i class="delete-button">×</i></div><div class="plus">+</div><div class="counter">%num%</div><div class="minus">-</div></div>`;
+                html =  `<div class="item liquar-item" id="liquar-%ID%">
+                            <div class="name">%name%
+                                <div><i class="delete-button">×</i></div>
+                            </div>
+
+                                <div id="plus-%ID%-liquar" class="change plus">+</div>
+                                <div id="counter-%ID%-liquar">%num%</div>
+                                <div id="minus-%ID%-liquar" class="change minus">-</div>
+                                
+                        </div>`;
 
 
             } else if (type === `necessaries`) {
 
-                html = `<div class="item necessaries-item" id="necessaries-%ID%"><div class="name">%name%<i class="delete-button">×</i></div><div class="plus">+</div><div class="counter">%num%</div><div class="minus">-</div></div>`;
+                html = `<div class="item necessaries-item" id="necessaries-%ID%">
+                            <div class="name">%name%
+                                <div><i class="delete-button">×</i></div>
+                            </div>
+
+                                <div id="plus-%ID%-necessaries" class="change plus">+</div>
+                                <div id="counter-%ID%-necessaries">%num%</div>
+                                <div id="minus-%ID%-necessaries" class="change minus">-</div>
+                    
+                        </div>`;
 
             }
 
-            newHtml = html.replace('%ID%',ID);
+            newHtml = html.replace(/%ID%/g,ID);
             newHtml = newHtml.replace('%name%',name);
             newHtml = newHtml.replace('%num%',num);
+
+            console.log(newHtml);
             document.querySelector(`.${type}-list`).insertAdjacentHTML('beforeend',newHtml);
             
         },
@@ -37,6 +67,11 @@ const UIController = function(){
 
             let el = document.getElementById(selectorID);
             el.parentNode.removeChild(el);
+        },
+
+        changeUiNumber:(num,ID,category) => {
+
+            document.getElementById(`counter-${ID}-${category}`).textContent = num;
         }
     }
 
@@ -63,9 +98,9 @@ const InventoryController = function() {
     };
 
     let allobject={
-        amoOfFood:[],
-        amoOfLiquar:[],
-        amoOfNecessaries:[]
+        foods:[],
+        liquar:[],
+        necessaries:[]
     }
  
     return{
@@ -85,47 +120,47 @@ const InventoryController = function() {
                 if(type === `foods`) { //入力されたものの種別(type)に応じてオブジェクトを作成
 
                     //オブジェクトのIDを作成するための条件分岐
-                    if (allobject.amoOfFood.length === 0){ //　Foodオブジェクトの配列の長さが0の場合
+                    if (allobject.foods.length === 0){ //　Foodオブジェクトの配列の長さが0の場合
 
                         newObject = new Food(0,name,num);
-                        allobject.amoOfFood.push(newObject);
-                        console.log(allobject.amoOfFood);
+                        allobject.foods.push(newObject);
+                        console.log(allobject.foods);
 
                     } else {
 
-                        newObject = new Food(allobject.amoOfFood.length,name,num);
-                        allobject.amoOfFood.push(newObject);
-                        console.log(allobject.amoOfFood);
+                        newObject = new Food(allobject.foods.length,name,num);
+                        allobject.foods.push(newObject);
+                        console.log(allobject.foods);
 
         
                     }
 
                 } else if (type === `liquar`) {
 
-                    if (allobject.amoOfLiquar.length === 0){
+                    if (allobject.liquar.length === 0){
 
                         newObject = new Liquar(0,name,num);
-                        allobject.amoOfLiquar.push(newObject);
+                        allobject.liquar.push(newObject);
         
 
                     } else {
 
-                        newObject = new Liquar(allobject.amoOfLiquar.length,name,num);
-                        allobject.amoOfLiquar.push(newObject);
+                        newObject = new Liquar(allobject.liquar.length,name,num);
+                        allobject.liquar.push(newObject);
 
                     }
 
                 } else if (type === `necessaries`) {
                     
-                    if (allobject.amoOfNecessaries.length === 0){
+                    if (allobject.necessaries.length === 0){
 
                         newObject = new Necessaries(0,name,num);
-                        allobject.amoOfNecessaries.push(newObject);
+                        allobject.necessaries.push(newObject);
         
                     } else {
 
-                        newObject = new Necessaries(allobject.amoOfNecessaries.length,name,num);
-                        allobject.amoOfNecessaries.push(newObject);
+                        newObject = new Necessaries(allobject.necessaries.length,name,num);
+                        allobject.necessaries.push(newObject);
 
                     }
 
@@ -140,21 +175,40 @@ const InventoryController = function() {
 
                 if( type === 'food'){
                 
-                    allobject.amoOfFood.splice(ID,1);
+                    allobject.foods.splice(ID,1);
                     console.log(allobject);
 
                 } else if ( type === 'liquar') {
                 
-                    allobject.amoOfLiquar.splice(ID,1);
+                    allobject.liquar.splice(ID,1);
                     console.log(allobject);
 
                 
                 } else if ( type === 'necessaries' ) {
                 
-                    allobject.amoOfNecessaries.splice(ID,1);
+                    allobject.necessaries.splice(ID,1);
                     console.log(allobject);
                 }    
                 
+            },
+
+            changeNumber:(type,ID,category) => {
+                    
+                if (type === 'plus'){
+                    allobject[category][ID].number++;
+                    console.log(allobject[category][ID].number);
+
+                } else if (type === 'minus') {
+
+                    if(allobject[category][ID].number > 0) {
+                    allobject[category][ID].number--;
+                    console.log(allobject[category][ID].number);
+                     }
+                }    
+            },
+
+            getAllObj:() => {
+                return allobject
             }
 
     
@@ -163,6 +217,9 @@ const InventoryController = function() {
 
 
 const controller = function(UICtrl,InventoryCtrl) {
+    let allObj;
+    allObj =InventoryCtrl.getAllObj();
+
 
     document.querySelector('.button').addEventListener('click',() =>{
 
@@ -174,40 +231,56 @@ const controller = function(UICtrl,InventoryCtrl) {
 
         //入力された内容を画面に表示
         UICtrl.addItem(newItem.type,newObject.id,newObject.name,newObject.number);
-        // UICtrl.addItem(newItem.type,newItem.nameOfThing,newItem.numberOfThing);
-
+   
         //入力された内容をリセットする
         UICtrl.deleteInput();
     
     });
 
-    const ctrlDeleteItem = function(event){
-        let ids,splitID,type,id;
-        // console.log(event.target.parentNode.parentNode);
-        ids =event.target.parentNode.parentNode.id;
+    const editItem = function(event){
+        let ids,splitID,type,ID,checkID,category;
 
-        splitID = ids.split('-');
-        type = splitID[0];
-        id = splitID[1];
+        const splitIDs = ()=>{
+            splitID = ids.split('-');
+            type = splitID[0];
+            ID = splitID[1];
+            category = splitID[2];
+        };
 
-        //配列のオブジェクトを削除
-        InventoryCtrl.deleteObject(type,id);
+        checkID =event.target;
+        if (checkID.id){　　//＋か-をクリックした場合の処理
 
-        //UIからリスト削除
-        UICtrl.deleteList(ids);
+            ids = checkID.id;
+            
+            splitIDs();
+            console.log(type);
+            console.log(ID);
+            console.log(category);
+
+            // //データを編集
+            InventoryCtrl.changeNumber(type,ID,category);
+
+            console.log(allObj);
+            // //UIの数字を変更
+            UICtrl.changeUiNumber(allObj[category][ID].number,ID,category);
+
+        }else{   //×クリックした場合の処理
+
+            ids =event.target.parentNode.parentNode.parentNode.id;
+                
+            splitIDs();
+
+            //配列のオブジェクトを削除
+            InventoryCtrl.deleteObject(type,ID);
+    
+            //UIからリスト削除
+            UICtrl.deleteList(ids);
+    
+        }
         
     };
 
-    document.querySelector('.listall').addEventListener('click',ctrlDeleteItem);
-    // document.querySelectorALL('.food-list').forEach(function(deletebutton){
-
-    //     deletebutton.addEventListener('click',function(cur){
-    //         let ids =cur.parentNode.parentNode.id;
-    //         console.log(ids);
-    //     });
-        
-    // });
-    
+    document.querySelector('.listall').addEventListener('click',editItem);
 
     
 }(UIController(),InventoryController());
