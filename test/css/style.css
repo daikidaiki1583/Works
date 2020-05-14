@@ -1,4 +1,32 @@
-html {
-  font-size: 62.5%;
+html .wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 300px;
+}
+
+html .wrap .image {
+  width: 200px;
+  margin: 10px;
+}
+
+html .wrap .image img {
+  width: 100%;
+}
+
+html .button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: yellow;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 /*# sourceMappingURL=style.css.map */

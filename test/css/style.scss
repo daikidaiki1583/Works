@@ -1,3 +1,25 @@
 html{
-    font-size: 62.5%;
+
+    .wrap{
+        display: flex;
+        height: 300px;
+        .image{
+            width: 200px;
+            margin: 10px;
+            img{
+                width: 100%;
+            }
+        }
+    }
+
+    .button{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: yellow;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
 }
