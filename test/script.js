@@ -1,30 +1,37 @@
-const wrapDom = document.querySelector('.wrap');
+/**
+ * const john = new Person('john','2000','designer');
+ *console.log(john);
+ *
+ * hoistingされないためエラーが返る。
+ */
 
-const image = wrapDom.addEventListener('click',el => {
+//クラス宣言　hoistingされない
+// class Person {
+//     constructor (name,yearOfBirth,job){
+//         this.name = name;
+//         this.yearOfBirth = yearOfBirth;
+//         this.job = job
+//     }
+// }
 
+// const john = new Person('john','2000','designer');
+// console.log(john);
 
-    const photo = el.target.src;
-    const newPhoto =photo.replace(/http:\/\/127.0.0.1:5500/,`.`);
-    let newNum;
-    let displayPhoto = () =>{
-        document.getElementById(`image${newNum}`).setAttribute('src',`${newPhoto}`);
-    }
+// class Athlete extends Person {
+//     constructor(name,yearOfBirth,job,sports,medals) {
+//         super(name,yearOfBirth,job);
+//         this.sports = sports;
+//         this.medals = medals;
+//     }
+// }
 
-    const num = parseInt(prompt('何番目に表示したいですか'));    
-    
-    if (num === 1) {
-        newNum = 4;
-        displayPhoto();
-    }   else if (num === 2) {
-        newNum = 5;
-        displayPhoto();
-    }  else if (num === 3) {
-        newNum = 6;
-        displayPhoto();
+// const kobe = new Athlete('kobe','1983','athlete','basket','gold');
+// console.log(kobe);
 
-    } else {
-        alert('1~3を入力してください');
-    }
+const test = {
+    name:'',
+    birth:''
+}
 
-});
-
+[name] = 'daiki';
+console.log([name])

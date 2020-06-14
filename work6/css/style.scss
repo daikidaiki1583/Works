@@ -1,0 +1,24 @@
+body{
+
+    table{
+        border-collapse: collapse;
+        tr{
+            border: 1px solid black;
+
+
+            th{
+                height: 40px;
+                width: 100px;
+                border: 1px solid black;
+
+            }
+
+            td{
+                height: 80px;
+                border: 1px solid black;
+
+            }
+
+        }
+    }
+}

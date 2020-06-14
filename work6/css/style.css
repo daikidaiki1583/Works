@@ -1,0 +1,19 @@
+body table {
+  border-collapse: collapse;
+}
+
+body table tr {
+  border: 1px solid black;
+}
+
+body table tr th {
+  height: 40px;
+  width: 100px;
+  border: 1px solid black;
+}
+
+body table tr td {
+  height: 80px;
+  border: 1px solid black;
+}
+/*# sourceMappingURL=style.css.map */

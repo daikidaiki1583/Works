@@ -1,0 +1,23 @@
+body table {
+  border-collapse: collapse;
+  border: 1px solid black;
+  height: 400px;
+}
+
+body table tr {
+  border: 1px solid black;
+}
+
+body table tr :nth-child(1) {
+  width: 800px;
+}
+
+body table tr th {
+  border: 1px solid black;
+  width: 40px;
+}
+
+body table tr td {
+  border: 1px solid black;
+}
+/*# sourceMappingURL=style.css.map */

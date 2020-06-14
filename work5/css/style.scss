@@ -1,0 +1,23 @@
+body{
+    table{
+        border-collapse:collapse;
+        border:1px solid black;
+        height: 400px;
+
+        tr{
+            border:1px solid black;
+                :nth-child(1){
+                    width: 800px;
+                }
+
+            th{
+                border:1px solid black;
+                width: 40px;
+            }
+
+            td{
+                border:1px solid black;
+            }
+        }
+    }
+}
