@@ -17,7 +17,6 @@ class App extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state.text) 
     this.setState({
       todo:this.state.todo.concat(this.state.text)
     })
@@ -31,7 +30,9 @@ class App extends React.Component {
   }
 
   render() {
-    console.log(this.state.todo)
+    const todos =this.state.todo.map((todolist,idx) => {
+    return <li key={idx}>{todolist}</li>
+    })
     return (
       <div className="App">
           <form onSubmit={this.handleSubmit}>
@@ -46,7 +47,7 @@ class App extends React.Component {
             />
           </form>
           <div id='todoList'>
-
+            {todos}
           </div>
       </div>
     );
