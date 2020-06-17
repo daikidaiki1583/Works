@@ -30,9 +30,6 @@ class App extends React.Component {
   }
 
   render() {
-    const todos =this.state.todo.map((todolist,idx) => {
-    return <li key={idx}>{todolist}</li>
-    })
     return (
       <div className="App">
           <form onSubmit={this.handleSubmit}>
@@ -47,7 +44,13 @@ class App extends React.Component {
             />
           </form>
           <div id='todoList'>
-            {todos}
+            {this.state.todo.map((todolist,idx)=>{
+              return(
+                <ToDo
+                text={todolist}
+                id={idx}
+              />)
+            })}
           </div>
       </div>
     );
