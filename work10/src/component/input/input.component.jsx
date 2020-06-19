@@ -1,11 +1,14 @@
 import React from 'react';
 import './input.styles.scss';
 
-const Input = ({handleChange}) => {
+const Input = ({handleChange,value}) => {
+
         return(
-                <input 
+                <input
                 onChange={handleChange}
-                />
+                value={value}
+                >
+                </input>
 
         )
 

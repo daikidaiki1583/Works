@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom'
+// import ReactDOM from 'react-dom'
 import './App.css';
 import Input from './component/input/input.component'
 import Button from './component/button/button.component'
@@ -10,33 +10,41 @@ class App extends React.Component {
     super(props)
 
     this.state={
-      todo:[],
+      todos:[],
       text:''
     }
+
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({
-      todo:this.state.todo.concat(this.state.text)
-    })
-
+    const text = this.state.text
+    this.setState({todos:this.state.todos.concat(text)})
+    this.setState({text:''})
+    
   }
 
   handleChange = (e) => {
-    const { value } = e.target
+    const {value} = e.target
     this.setState({text:value})
+  }
 
+  handleClick = (e) => {
+    const todos = this.state.todos.slice()
+    const index = parseInt(e.target.parentNode.id)
+    todos.splice(index,1)
+    this.setState({todos:todos})      
   }
 
   render() {
+    const todoList = this.state.todos.map((todo,id) => <ToDo key={id} id={id} text={todo} handleClick={this.handleClick}/> )
+    
     return (
       <div className="App">
           <form onSubmit={this.handleSubmit}>
             <Input
-              type='text'
-              name='text'
               handleChange={this.handleChange}
+              type='text'
               value={this.state.text}
             />
             <Button
@@ -44,13 +52,7 @@ class App extends React.Component {
             />
           </form>
           <div id='todoList'>
-            {this.state.todo.map((todolist,idx)=>{
-              return(
-                <ToDo
-                text={todolist}
-                id={idx}
-              />)
-            })}
+              {todoList}
           </div>
       </div>
     );
