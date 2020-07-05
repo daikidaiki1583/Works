@@ -1,0 +1,42 @@
+
+#root{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+
+    .register-login-form{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+
+        form{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 400px;
+            margin: 20px;
+            text-align: center;
+            background-color: rgba(245,245,245,1);
+            padding: 40px;
+            border-radius: 10px;
+            
+            input{
+                margin: 10px auto;
+                padding: 10px 0;
+                border-bottom:#dcdcdc 1px solid;
+                
+
+            }
+            button{
+                width: 100px;
+                margin: auto;
+            }
+        }
+
+    }
+
+
+
+}
