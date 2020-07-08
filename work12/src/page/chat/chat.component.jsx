@@ -15,25 +15,24 @@ class Chat extends React.Component {
             displayName:'',
             uid:'',
             message:[],
-            lastVisible:'',
-            firstVisible:undefined,
-            displayedResults:30,
-            page:1,
-            lastPage:''
         }
     }
 
     loadText =  () =>{
-
-        const query = firestore.collection('text').orderBy('serverTimeStamp','desc')
-
-        query.limit(this.state.displayedResults).onSnapshot(async snapshot => {
-            
-            snapshot.docChanges().forEach(change => {
-                
-                // if (change.type === 'removed'){
-
-                // } else {
+        
+        const query = firestore.collection('text').orderBy('serverTimeStamp','asc')
+        query.onSnapshot(async snapshot => {
+            const isSnapshot = snapshot.metadata.hasPendingWrites ? 'local' :'server' 
+            if (isSnapshot === 'local'){
+                return
+            }
+            snapshot.docChanges().forEach(async change => {
+                if (change.type === 'removed'){
+                    
+                    const message =this.state.message
+                    const newMessage = message.filter(word => word.text !== change.doc.data().text)
+                    this.setState({message:newMessage})
+                } else {
                     const {text,displayName,serverTimeStamp} = change.doc.data()
 
                     if(serverTimeStamp === null){
@@ -41,29 +40,28 @@ class Chat extends React.Component {
                     }
 
                     const message = this.state.message
-                    const obj = {
+                    const obj = { 
                         text:text,
                         displayName:displayName,
                         serverTimeStamp:serverTimeStamp.toDate(),
                         id:change.doc.id,
                         index:change.newIndex + 1
                     }
-                    this.setState(()=>({
-                        message:message.concat(obj)
+                    message.unshift(obj)
+                    await this.setState(()=>({
+                        message:message
                     }))
-                // } 
+                } 
             })
         })
 
     }
-    
-
  
     componentDidMount(){
 
         auth.onAuthStateChanged(async (user)  =>{
             if(!user){
-                alert('ログインしてください')
+                alert('ログアウトしました。')
                 this.props.history.push('/')
             } else{ 
                 const {uid,displayName} = user
@@ -74,85 +72,10 @@ class Chat extends React.Component {
         //最初のテキスト読み込み
         this.loadText()
 
-        const query = firestore.collection('text').orderBy('serverTimeStamp','desc')        
-        // query.limit(this.state.displayedResults).onSnapshot(snapshot => {
-        //     this.setState({lastVisible:snapshot.docs[snapshot.docs.length-1]})
-        // })
-
-        query.onSnapshot(snapshot => {
-            this.setState({lastPage:Math.ceil(snapshot.docs.length/this.state.displayedResults)})
-            this.setState({lastVisible:snapshot.docs[this.state.displayedResults-1]})
-        })
-
-
     }
 
     signOut=()=>{
         auth.signOut()
-    }
-
-    handleClick =  async (e) => {
-
-        const {name} = e.target
-        let query
-        if (name === 'next') {
-            query = firestore.collection('text').orderBy('serverTimeStamp','desc').startAfter(this.state.lastVisible)
-
-            firestore.collection('text').orderBy('serverTimeStamp','desc')
-            .endAt(this.state.lastVisible)
-            .get().then(snapshot =>{
-                this.setState({firstVisible:snapshot.docs[snapshot.docs.length - this.state.displayedResults]})
-            })
-
-            query.limit(this.state.displayedResults).get().then(async snapshot=>{
-                this.setState({lastVisible:snapshot.docs[snapshot.docs.length-1]})
-            })
-
-            const page =this.state.page + 1
-            this.setState({page:page})
-            
-        } else{
-            query = firestore.collection('text').orderBy('serverTimeStamp','desc').startAt(this.state.firstVisible)  
-
-            firestore.collection('text').orderBy('serverTimeStamp','desc')
-            .endBefore(this.state.firstVisible)
-            .get().then(snapshot =>{
-                this.setState({firstVisible:snapshot.docs[snapshot.docs.length-this.state.displayedResults]})
-            })
-
-            query.limit(this.state.displayedResults).get().then(snapshot=>{
-                this.setState({lastVisible:snapshot.docs[snapshot.docs.length-1]})
-            })
-
-            const page =this.state.page - 1
-            this.setState({page:page})
-
-        }
-        
-        const message =this.state.message
-        const nextMessage = message.filter(word => word.length === -1)
-        this.setState({message:nextMessage})
-
-        query.limit(this.state.displayedResults).get().then(async snapshot=>{
-
-            snapshot.docChanges().forEach(async change =>{
-
-                const {text,displayName,serverTimeStamp} = change.doc.data()
-                const obj ={
-                    text:text,
-                    displayName:displayName,
-                    serverTimeStamp:serverTimeStamp.toDate(),
-                    id:change.doc.id,
-                    index:change.newIndex + 1
-                }
-                const message = this.state.message.concat(obj)
-                this.setState({message:message})
-                
-            })
-        
-        })
-        .catch(error => console.log(error))
-
     }
 
     handleChange = (e) => {
@@ -160,10 +83,14 @@ class Chat extends React.Component {
         this.setState({text:value})
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault()
-        
-        firestore.collection('text').add({
+
+        if (!this.state.text) {
+            alert('文字を入力してください')
+            return
+        }
+        await firestore.collection('text').add({
             displayName:this.state.displayName,
             uid:this.state.uid,
             text:this.state.text,        
@@ -175,8 +102,7 @@ class Chat extends React.Component {
 
     render(){
 
-        const convesation= this.state.message.map((message) => {
-            
+        const convesation= this.state.message.map((message) => {      
             return(
                 <div className='message' key={message.id} >
                     <div className='index'>{message.index}</div>
