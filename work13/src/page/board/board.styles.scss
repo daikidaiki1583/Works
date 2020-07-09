@@ -1,0 +1,30 @@
+.board{
+    width: 50vw;
+    min-width: 400px;
+    margin: auto;
+
+    form{
+        width: 100%;
+
+        textarea{
+            width: 100%;
+        }
+    }
+}
+
+$small:'(max-width:768px)';
+
+@media #{$small}{
+    
+    .board{
+        width: 100%;
+    
+        form{
+            width: 100%;
+            padding: 10px;
+            textarea{
+                width: 100%;
+            }
+        }
+    }
+}

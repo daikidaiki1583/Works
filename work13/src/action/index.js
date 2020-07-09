@@ -1,0 +1,1 @@
+export const inputText = (text) =>({type:'INPUT_TEXT',text:text})
