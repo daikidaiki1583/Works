@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 
 import Textarea from '../../component/textarea/textarea.component'
 import {inputText,deleteText} from '../../redux/action/index'
+import { firestore,serverTimeStamp } from '../../firebase/firebase.utiles'
 
 class Board extends React.Component {
 
@@ -15,7 +16,19 @@ class Board extends React.Component {
 
     handleSubmit = (e) =>{
         e.preventDefault()
-        const {deleteText} = this.props
+        const {deleteText,text} = this.props
+
+        firestore.collection('text').add({
+            post:text,
+            severTimeStamp:serverTimeStamp()
+        })
+        .then(result =>{
+            console.log(result)
+        })
+        .catch(error =>{
+            console.log(error)
+        })
+
         deleteText()
     }
     
