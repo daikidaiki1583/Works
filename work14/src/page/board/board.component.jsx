@@ -14,11 +14,12 @@ class Board extends React.Component {
         await inputText(value)
     }
 
-    handleSubmit = (e) =>{
+    handleSubmit = async (e) =>{
         e.preventDefault()
-        const {deleteText,text} = this.props
-
-        firestore.collection('text').add({
+        const {deleteText,text,match} = this.props
+         
+        
+        firestore.collection('boards').doc(`${match.params.number}`).collection('post').add({
             post:text,
             serverTimeStamp:serverTimeStamp()
         })
@@ -33,8 +34,8 @@ class Board extends React.Component {
     }
     
     componentDidMount(){
-        const {savePost} = this.props
-        const query =firestore.collection('text')
+        const {savePost,match} = this.props
+        const query =firestore.collection('boards').doc(`${match.params.number}`).collection('post')
         query.orderBy('serverTimeStamp').onSnapshot(snapshot => {
             snapshot.docChanges().forEach(change => {
                 const {post,serverTimeStamp} = change.doc.data()
@@ -51,6 +52,7 @@ class Board extends React.Component {
                 savePost(obj)
             })
         })
+        console.log(this.props)
     
     }
     
