@@ -2,7 +2,6 @@ $brown:#ffe4b5;
 
 .App{
     background-color: #fffff4;
-    height: 100vh;
     .board{
         width: 50vw;
         min-width: 400px;
@@ -42,11 +41,12 @@ $brown:#ffe4b5;
                 margin: 5px 0;
                 position: relative;    
                 padding: 10px;
+                padding-bottom:25px ;
                 padding-left: 20px;
                 text-align: left;
                 .time{
                     position: absolute;
-                    bottom:0;
+                    bottom:10px;
                     right: 10px;
                     color:gray;
                     font-size: 10px;

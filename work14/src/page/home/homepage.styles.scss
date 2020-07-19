@@ -1,0 +1,35 @@
+.home{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .menu{
+        display: flex;
+        .menu-item{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 400px;
+            height: 300px;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color:  #6f5436;
+            &.listen{
+                background-color: #ff9e9e;
+            }
+
+            &.watch{
+                background-color:#fdd35c;
+            }
+
+            .large{
+                
+                font-size: 40px;
+                font-weight: bold;
+            }
+        }
+    }
+}

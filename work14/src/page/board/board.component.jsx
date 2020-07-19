@@ -1,9 +1,10 @@
 import React from 'react'
 import './board.styles.scss'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 import Textarea from '../../component/textarea/textarea.component'
-import {inputText,deleteText,savePost} from '../../redux/action/index'
+import {inputText,deleteText,savePost,deletePost,deleteBoard,getTitle,deleteTitle} from '../../redux/action/index'
 import { firestore,serverTimeStamp } from '../../firebase/firebase.utiles'
 
 class Board extends React.Component {
@@ -18,19 +19,30 @@ class Board extends React.Component {
         e.preventDefault()
         const {deleteText,text,match} = this.props
          
+        if (text === ''){
+            alert('テキストを入力してください')
+            return
+        }
+        deleteText()
         
         firestore.collection('boards').doc(`${match.params.number}`).collection('post').add({
             post:text,
             serverTimeStamp:serverTimeStamp()
         })
         .then(result =>{
-            console.log(result)
+
+            firestore.collection('boards').doc(`${match.params.number}`).update({
+                serverTimeStamp:serverTimeStamp()
+            })
+            .then(result => {
+                console.log(result)
+            })
+
         })
         .catch(error =>{
             console.log(error)
         })
 
-        deleteText()
     }
     
     componentDidMount(){
@@ -52,12 +64,26 @@ class Board extends React.Component {
                 savePost(obj)
             })
         })
-        console.log(this.props)
+
+        this.loadTitle()
     
     }
     
+    componentWillUnmount(){
+        const {deleteTitle,deletePost} = this.props
+        deletePost()
+        deleteTitle()
+    }
+
+    loadTitle = async () => {
+        const {getTitle} = this.props
+        const query =firestore.collection('boards').doc(`${this.props.match.params.number}`)
+        const {title} = await query.get().then(doc =>doc.data()).catch(error => error)
+        getTitle(title)
+    }
+
     render(){
-        const {text,post} = this.props
+        const {text,post,deleteBoard,title} = this.props
         const postArea = post.map(post => {
             return(
                 <div className='post' key={post.id}>
@@ -76,13 +102,16 @@ class Board extends React.Component {
                             post.serverTimeStamp.getMinutes().toString()}   
                         </div>
                     </div>
-
                 </div>
 
             ) 
         })
         return(
             <div className='board'>
+                <Link to='/createboard' onClick={deleteBoard}>戻る</Link>
+                <h1>
+                    {title}
+                </h1>
                 <form onSubmit={this.handleSubmit}>
                     <Textarea
                         handleChange={this.handleChange}
@@ -91,8 +120,12 @@ class Board extends React.Component {
                     />
                     <button>投稿</button>
                 </form>
+                <h1>投稿一覧</h1>
                 <div className='displaypost'>
-                    {postArea.reverse()}
+                    {
+                    postArea.length === 0 ?
+                    <div>この掲示板にはまだ投稿がありません。</div> :
+                    postArea.reverse()}
                 </div>
             </div>
 
@@ -103,13 +136,18 @@ class Board extends React.Component {
 
 const mapStateToProps = state => ({
     text:state.input,
-    post:state.save    
+    post:state.save,
+    title:state.title,    
 })
 
 const mapDispatchToProps = dispatch => ({
         inputText: text => dispatch(inputText(text)),
         deleteText: () => dispatch(deleteText()),
-        savePost: (obj) => dispatch(savePost(obj))
+        savePost: obj => dispatch(savePost(obj)),
+        deleteBoard: () => dispatch(deleteBoard()),
+        deletePost: () => dispatch(deletePost()),
+        getTitle: title => dispatch(getTitle(title)),
+        deleteTitle: () => dispatch(deleteTitle())
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(Board)
