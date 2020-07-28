@@ -19,7 +19,11 @@ class HomePage extends React.Component {
                         <div className='small'>柴犬のことを</div>
                         <div className='large'>聞いてみる</div>
                     </Link>
-                    <Link className='menu-item watch' to='/'>
+                    <Link className='menu-item post' to='/postimage'>
+                        <div className='small'>柴犬のことを</div>
+                        <div className='large'>見てもらう</div>
+                    </Link>
+                    <Link className='menu-item display' to='/displayimage'>
                         <div className='small'>柴犬のことを</div>
                         <div className='large'>見てみる</div>
                     </Link>

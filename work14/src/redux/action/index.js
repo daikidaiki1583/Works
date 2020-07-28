@@ -9,3 +9,6 @@ export const deleteBoard = () => ({type:'DELETE_BOARD'})
 
 export const getTitle = (title) => ({type:'GET_TITLE',payload:title}) 
 export const deleteTitle = () => ({type:'DELETE_TITLE',payload:''})
+
+export const displayImage = (obj) => ({type:'DISPLAY_IMAGE',payload:obj})
+export const deleteImage = (obj) => ({type:'DELETE_IMAGE',payload:obj})

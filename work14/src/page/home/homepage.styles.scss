@@ -4,7 +4,10 @@
     justify-content: center;
 
     .menu{
+        width: 80vw;
         display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
         .menu-item{
             display: flex;
             flex-direction: column;
@@ -21,9 +24,11 @@
                 background-color: #ff9e9e;
             }
 
-            &.watch{
+            &.display{
                 background-color:#fdd35c;
             }
+
+
 
             .large{
                 

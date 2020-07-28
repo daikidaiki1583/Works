@@ -1,0 +1,20 @@
+.displayImage{
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: auto;
+    .image-item{
+        margin: 10px;
+        background-color: rgba(0,0,0,0.1);
+        border-radius: 10px;
+        padding: 5px;
+        .image{
+            width: 300px;
+            img{
+                width: 100%;
+            }
+        }
+
+    }
+}
